@@ -1,0 +1,1 @@
+# Minimal TanStack Starter Template
