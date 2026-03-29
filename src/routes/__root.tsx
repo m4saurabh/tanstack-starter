@@ -1,8 +1,8 @@
-import { TanStackDevtools } from "@tanstack/react-devtools"
-import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
+import { TanStackDevtools } from "@tanstack/react-devtools";
+import { HeadContent, Link, Scripts, createRootRoute } from "@tanstack/react-router";
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
-import appCss from "@/styles.css?url"
+import appCss from "@/styles.css?url";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -14,16 +14,22 @@ export const Route = createRootRoute({
     links: [{ rel: "stylesheet", href: appCss }],
   }),
   shellComponent: RootDocument,
-})
+  notFoundComponent: () => (
+    <>
+      <p>NOT FOUND</p>
+      <Link to="/">Go Home</Link>
+    </>
+  ),
+});
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+function RootDocument({ children }: React.PropsWithChildren) {
   return (
     <html lang="en">
       <head>
         <script />
         <HeadContent />
       </head>
-      <body className="font-sans antialiased">
+      <body>
         {children}
         <TanStackDevtools
           config={{ position: "bottom-right" }}
@@ -32,5 +38,5 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
-  )
+  );
 }
